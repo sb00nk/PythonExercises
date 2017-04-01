@@ -40,17 +40,24 @@ def penalty_count(game_seq):
             penalty += abs(num_token - counter)
     return str(penalty)
 
+def get_token_update(count, token):
+    """
+    Ritorna la cardinalità dell'elemento richiesto in un dizionario
+    """
+    old_value = count[token]
+    count[token] -= min(count[token], 1)
+    return min(old_value, 1)
+
 def order_sequence(game_seq):
     """
     Esegue l'ordinamento della sequenza di gioco
     """
     count = Counter(game_seq)
     order_string = ''
-    for token in '0123456789':
+    for token in VALIDTOKENS:
         order_string += token * count[token]
-        order_string += PLUSTOKEN * min(count[PLUSTOKEN], 1)
-        count[PLUSTOKEN] -= min(count[PLUSTOKEN], 1)
-    order_string += PLUSTOKEN * count[PLUSTOKEN]
+        order_string += PLUSTOKEN * get_token_update(count, PLUSTOKEN)
+
     return order_string
 
 def main():

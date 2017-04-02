@@ -42,7 +42,7 @@ def penalty_count(game_seq):
 
 def get_token_update(count, token):
     """
-    Ritorna la cardinalità dell'elemento richiesto in un dizionario
+    Estrae i token uno alla volta dal dizionario di count
     """
     old_value = count[token]
     count[token] -= min(count[token], 1)
@@ -55,7 +55,7 @@ def order_sequence(game_seq):
     count = Counter(game_seq)
     order_string = ''
     for token in VALIDTOKENS:
-        order_string += token * count[token]
+        order_string += token * count.pop(token,0)
         order_string += PLUSTOKEN * get_token_update(count, PLUSTOKEN)
 
     return order_string

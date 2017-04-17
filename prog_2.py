@@ -1,7 +1,7 @@
 """
 Esercizio Programmazione
-pyton3 prog_1.py --url <url_netflows_csv_file> [--output <file_out>]
-                [--host | --common]
+pyton3 prog_2.py --url <url_csv_file> | --file <csv_file> [--output <file_out>]
+                [--unique][--max <max_key>][--host | --common]
 """
 import argparse
 import collections
